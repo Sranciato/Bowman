@@ -2,6 +2,7 @@
 using UnityEngine.Networking;
 using UnityEngine;
 
+// Class for pause menu
 public class Pause : MonoBehaviour
 {
     public static bool IsOn = false;

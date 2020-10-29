@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Class for moving arrow over the server
 public class MoveServerArrow : MonoBehaviour
 {
     private float speed, timeStart;
@@ -15,10 +16,6 @@ public class MoveServerArrow : MonoBehaviour
     }
     void Update()
     {
-        // if (speed != 0)
-        // {
-        //     transform.position += transform.forward * (speed * Time.deltaTime);
-        // }
         if (Time.time - timeStart > 15)
         {
             Destroy(gameObject);

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// class for moving arrow 
 public class MoveArrow : MonoBehaviour
 {
     private float speed, timeStart;
@@ -18,10 +19,9 @@ public class MoveArrow : MonoBehaviour
     {
         timeStart = Time.time;
     }
+    // Checks in front of arrow for a raycast hit
     void Update()
     {
-        // Physics.SphereCast(transform.position, .05f, transform.forward, out _hit, 2f, mask)
-        // Physics.Raycast(transform.position, transform.forward, out _hit, 2f, mask)
         RaycastHit _hit;
         if (Physics.Raycast(transform.position, transform.forward, out _hit, 2f, mask))
         {
@@ -45,6 +45,7 @@ public class MoveArrow : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    // called from player object when arrow is shot
     public void UpdateSpeed(float newSpeed, bool _hitscan, GameObject _playerGameObject)
     {
         playerGameObject = _playerGameObject;

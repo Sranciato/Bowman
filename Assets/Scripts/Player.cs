@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
+// Class for player
 public class Player : NetworkBehaviour
 {
     public bool isDead;
@@ -46,17 +47,17 @@ public class Player : NetworkBehaviour
             hasDiedOnce = true;
         }
     }
+    // Setup player on the server
     public void SetupPlayer()
     {
         CmdBroadCastNewPlayerSetup();
     }
-
+    // Setup all players on the server
     [Command]
     private void CmdBroadCastNewPlayerSetup()
     {
         RpcSetupPlayerOnAllClients();
     }
-
     [ClientRpc]
     private void RpcSetupPlayerOnAllClients()
     {
@@ -72,6 +73,7 @@ public class Player : NetworkBehaviour
 
         SetDefaults();
     }
+    // Called from powerup script to move the player backward
     [ClientRpc]
     public void RpcForcedJump(Vector3 direction)
     {
@@ -79,7 +81,7 @@ public class Player : NetworkBehaviour
         firstPerson = GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>();
         firstPerson.SetMoveDirectionForPowerUp(direction);
     }
-
+    // Deals damage to player who was hit
     [ClientRpc]
     public void RpcTakeDamage(int _amount, string nameTag, bool _headshot)
     {
@@ -102,18 +104,19 @@ public class Player : NetworkBehaviour
             GameManager.instance.onKillCallback.Invoke(transform.name, nameTag);
         }
     }
+    // Set mouse sensitivity for player
     public void SetSensitivity(float value)
     {
         UnityStandardAssets.Characters.FirstPerson.FirstPersonController firstPerson;
         firstPerson = GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>();
         firstPerson.SetSens(value);
     }
-
+    // Shows hitmarker if player is shot
     private void StartHitMarker(Player _player, bool _headshot)
     {
         StartCoroutine(HitPlayer(_player, _headshot));
     }
-
+    // Determines if player was hit in the head or body
     private IEnumerator HitPlayer(Player _player, bool _headshot)
     {
         if (_headshot)
@@ -125,12 +128,12 @@ public class Player : NetworkBehaviour
         _player.headshot = false;
     }
 
-
+    // Gets health of player
     public float GetHealthAmount()
     {
         return currentHealth;
     }
-
+    // Called when player health is 0 or less
     private void Die()
     {
         isDead = true;
@@ -152,7 +155,7 @@ public class Player : NetworkBehaviour
 
         StartCoroutine(Respawn());
     }
-
+    // Adds kill to player count
     private void AddKill()
     {
         kills += 1;
@@ -174,7 +177,7 @@ public class Player : NetworkBehaviour
     {
         return winnerName;
     }
-
+    // Called when player is eleminated and waits for respawn
     private IEnumerator Respawn()
     {
         yield return new WaitForSeconds(3);
@@ -186,7 +189,7 @@ public class Player : NetworkBehaviour
         hasDiedOnce = false;
         SetupPlayer();
     }
-
+    // Sets player default values
     public void SetDefaults()
     {
         isDead = false;

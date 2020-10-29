@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 
+// Class for player scoreboard
 public class PlayerScoreboardItem : MonoBehaviour
 {
     [SerializeField]

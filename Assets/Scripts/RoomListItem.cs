@@ -2,6 +2,7 @@
 using UnityEngine.Networking.Match;
 using UnityEngine;
 
+// Class for list of rooms in the lobby scene
 public class RoomListItem : MonoBehaviour
 {
     public delegate void JoinRoomDelegate(MatchInfoSnapshot _match);

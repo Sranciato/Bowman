@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Class for scorebaord
 public class Scoreboard : MonoBehaviour
 {
     [SerializeField]
     GameObject playerScoreboardPrefab;
     [SerializeField]
     Transform playerScoreboardList;
+
+    // Gets all player data on enabling
     void OnEnable()
     {
         // get and array of players
@@ -26,6 +29,7 @@ public class Scoreboard : MonoBehaviour
         }
     }
 
+    // Clear list of players data
     void OnDisable()
     {
         // clean up list of items

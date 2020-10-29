@@ -4,6 +4,7 @@ using UnityEngine.Networking.Match;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Class for joining a game
 public class JoinGame : MonoBehaviour
 {
     List<GameObject> roomList = new List<GameObject>();

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
+// Class for spawning arrow 
 public class SpawnArrow : NetworkBehaviour
 {
     public GameObject firePoint;
@@ -84,6 +85,7 @@ public class SpawnArrow : NetworkBehaviour
             playedAudioOnce = false;
         }
     }
+    // Called when player shoots an arrow
     [Client]
     void Shoot()
     {
@@ -104,6 +106,7 @@ public class SpawnArrow : NetworkBehaviour
             }
         }
     }
+    // Called when arrow raycast hits player
     [Command]
     void CmdPlayerShot2(string _playerID, int _damage, string nameTag, Vector3 direction)
     {
@@ -130,19 +133,7 @@ public class SpawnArrow : NetworkBehaviour
         Player _player = GameManager.GetPlayer(_playerID);
         _player.RpcTakeDamage(_damage, nameTag, _headshot);
     }
-
-    // [Command]
-    // void CmdOnShoot(float increaseSpeed, bool _hitScan)
-    // {
-    //     GameObject MoveArrow;
-    //     MoveArrow = Instantiate(effectToSpawn, firePoint.transform.position, Quaternion.identity);
-    //     MoveArrow.GetComponent<MoveArrow>().nameTag = transform.name;
-    //     MoveArrow.transform.localRotation = firstPerson.GetCamRotation();
-    //     MoveArrow.GetComponent<MoveArrow>().UpdateSpeed(increaseSpeed, _hitScan);
-    //     NetworkServer.Spawn(MoveArrow);
-    //     increaseSpeed = speed;
-    // }
-
+    // Start particle process for when arrow collides
     [Command]
     void CmdOnShoot(float increaseSpeed, bool _hitScan)
     {
@@ -159,6 +150,7 @@ public class SpawnArrow : NetworkBehaviour
         MoveArrow.GetComponent<MoveServerArrow>().UpdateSpeed(increaseSpeed, _hitScan, null);
         increaseSpeed = speed;
     }
+    // Instantiates arrow and particle effects
     void spawnVFX(bool _hitScan)
     {
         if (!isLocalPlayer)

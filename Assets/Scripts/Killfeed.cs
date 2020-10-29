@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Displays players who were recently eliminated
 public class Killfeed : MonoBehaviour
 {
     [SerializeField]

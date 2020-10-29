@@ -1,6 +1,7 @@
 ﻿using UnityEngine.Networking;
 using UnityEngine;
 
+// Class for creating and hosting a room
 public class HostGame : MonoBehaviour
 {
     [SerializeField]

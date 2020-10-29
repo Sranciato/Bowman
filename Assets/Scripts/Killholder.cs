@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+// Class for shwoing who eliminated who
 public class Killholder : MonoBehaviour
 {
     [SerializeField]
